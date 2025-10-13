@@ -363,6 +363,75 @@
             overflow-x: auto;
             font-size: 0.85em;
             margin: 10px 0;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        pre:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: #764ba2;
+        }
+
+        .code-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #2d2d2d;
+            z-index: 9999;
+            padding: 60px 40px 40px 40px;
+            overflow: auto;
+            display: none;
+        }
+
+        .code-fullscreen.active {
+            display: block;
+        }
+
+        .code-fullscreen pre {
+            max-width: 100%;
+            height: auto;
+            font-size: 1.1em;
+            margin: 0;
+        }
+
+        .close-fullscreen {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            z-index: 10000;
+            transition: background 0.3s ease;
+        }
+
+        .close-fullscreen:hover {
+            background: #764ba2;
         }
 
         footer {
@@ -431,11 +500,11 @@
                 <h2>Education</h2>
                 <div class="stats">
                     <div class="stat-box">
-                        <img src="images/masters-university-logo.jpg" alt="Ontario Tech University" class="stat-logo" style="width: 200px; height: 200px;">
+                        <img src="images/ontario-tech-logo.jpg" alt="Ontario Tech University" class="stat-logo" style="width: 200px; height: 200px;">
                         <div class="stat-label" style="font-size: 1.3em;">Master's in Mechatronics Engineering<br>Ontario Tech University, Canada</div>
                     </div>
                     <div class="stat-box">
-                        <img src="images/bachelors-university-logo.jpg" alt="Nottingham University" class="stat-logo" style="width: 200px; height: 200px;">
+                        <img src="images/nottingham-university-logo.jpg" alt="Nottingham University" class="stat-logo" style="width: 200px; height: 200px;">
                         <div class="stat-label" style="font-size: 1.3em;">Bachelor's in Software Engineering<br>Nottingham University, UK<br><strong>First Class with Honours</strong></div>
                     </div>
                 </div>
@@ -448,6 +517,19 @@
             <div id="experience" class="tab-content">
                 <h2>Industrial Experience</h2>
                 
+                <div class="achievement-item" style="margin-bottom: 30px;">
+                    <img src="images/gm-logo.jpg" alt="General Motors" class="achievement-image">
+                    <div class="achievement-content">
+                        <h3>Part-Time Assembly Technician</h3>
+                        <p><strong>General Motors | Ontario, Canada | October 2025 – Present</strong></p>
+                        <p>• Installing and calibrating automotive sensors for advanced driver assistance systems (ADAS)</p>
+                        <p>• Participating in car assembly line operations with focus on quality control</p>
+                        <p>• Working with precision tools and equipment for sensor installation and testing</p>
+                        <p>• Collaborating with engineering teams to ensure proper sensor integration</p>
+                        <p>• Contributing to vehicle safety systems implementation and quality assurance</p>
+                    </div>
+                </div>
+
                 <div class="achievement-item" style="margin-bottom: 30px;">
                     <img src="images/daedo-logo.jpg" alt="Daedo International" class="achievement-image">
                     <div class="achievement-content">
@@ -737,7 +819,9 @@
                             • Cross-entropy loss function<br>
                             • Backpropagation with Adam optimizer</p>
                             <p><strong>Code Snippet:</strong></p>
-                            <pre>import cv2
+                            <div style="position: relative;">
+                                <button class="fullscreen-btn" onclick="openCodeFullscreen(this)">⛶ Fullscreen</button>
+                                <pre>import cv2
 import mediapipe as mp
 import tensorflow as tf
 
@@ -757,6 +841,7 @@ while cap.isOpened():
             landmarks = [[lm.x, lm.y, lm.z] for lm in hand_landmarks.landmark]
             prediction = model.predict([landmarks])
             sign = np.argmax(prediction)</pre>
+                            </div>
                             <div class="tags">
                                 <span class="tag">Deep Learning</span>
                                 <span class="tag">Computer Vision</span>
@@ -780,7 +865,9 @@ while cap.isOpened():
                             • Normalization using Min-Max scaling<br>
                             • Gradient descent optimization</p>
                             <p><strong>Code Snippet:</strong></p>
-                            <pre>import pandas as pd
+                            <div style="position: relative;">
+                                <button class="fullscreen-btn" onclick="openCodeFullscreen(this)">⛶ Fullscreen</button>
+                                <pre>import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
@@ -799,6 +886,7 @@ model = Sequential([
     Dense(1)
 ])
 model.compile(optimizer='adam', loss='mean_squared_error')</pre>
+                            </div>
                             <div class="tags">
                                 <span class="tag">Time Series</span>
                                 <span class="tag">Regression</span>
@@ -822,7 +910,9 @@ model.compile(optimizer='adam', loss='mean_squared_error')</pre>
                             • Dimensionality reduction with PCA<br>
                             • Threshold-based classification</p>
                             <p><strong>Code Snippet:</strong></p>
-                            <pre>import cv2
+                            <div style="position: relative;">
+                                <button class="fullscreen-btn" onclick="openCodeFullscreen(this)">⛶ Fullscreen</button>
+                                <pre>import cv2
 import numpy as np
 
 # Load Haar Cascade classifier
@@ -841,6 +931,7 @@ while True:
     
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)</pre>
+                            </div>
                             <div class="tags">
                                 <span class="tag">Image Processing</span>
                                 <span class="tag">Pattern Recognition</span>
@@ -864,7 +955,9 @@ while True:
                             • Jacobian matrix for velocity control<br>
                             • Joint space interpolation</p>
                             <p><strong>Code Snippet:</strong></p>
-                            <pre>import rospy
+                            <div style="position: relative;">
+                                <button class="fullscreen-btn" onclick="openCodeFullscreen(this)">⛶ Fullscreen</button>
+                                <pre>import rospy
 from niryo_robot_python_ros_wrapper import *
 import numpy as np
 
@@ -883,6 +976,7 @@ niryo.move_pose(0.15, 0.0, 0.1, 0, 1.57, 0)
 niryo.close_gripper()
 niryo.move_pose(0.0, 0.15, 0.2, 0, 1.57, 0)
 niryo.open_gripper()</pre>
+                            </div>
                             <div class="tags">
                                 <span class="tag">Robotics</span>
                                 <span class="tag">Kinematics</span>
@@ -980,6 +1074,39 @@ niryo.open_gripper()</pre>
             // Scroll to top of content
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function openCodeFullscreen(button) {
+            const preElement = button.nextElementSibling;
+            const code = preElement.textContent;
+            
+            // Create fullscreen overlay
+            const fullscreen = document.createElement('div');
+            fullscreen.className = 'code-fullscreen active';
+            fullscreen.innerHTML = `
+                <button class="close-fullscreen" onclick="closeCodeFullscreen(this)">✕ Close</button>
+                <pre>${code}</pre>
+            `;
+            
+            document.body.appendChild(fullscreen);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCodeFullscreen(button) {
+            const fullscreen = button.parentElement;
+            fullscreen.remove();
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close fullscreen with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const fullscreen = document.querySelector('.code-fullscreen.active');
+                if (fullscreen) {
+                    fullscreen.remove();
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
     </script>
 </body>
 </html>
